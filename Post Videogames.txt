@@ -1,0 +1,9 @@
+{
+    "name": "El juego de Seba",
+    "description": "Un juego super divertido",
+    "platform": ["PC", "Xbox Series S/X", "PlayStation 4", "PlayStation 3", "Xbox 360", "Xbox One", "PlayStation 5"],
+    "released": "2013-09-17",
+    "genre": ["Action", "Adventure"],
+    "rating": 4,
+    "image": null
+}
