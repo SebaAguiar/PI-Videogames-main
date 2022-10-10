@@ -6,9 +6,12 @@ const { getDbInfo, getAllInfo, getApiInfo, getId } = require('../controllers/gam
 const { OK, CREATED, BAD_REQUEST, NOT_FOUND } = require('../controllers/statusVar');
 
 router.get('/', async(req, res) => {
-   const { name } = req.query;
+   // localhost:3001/videogames?name=grand
+   const { name } = req.query; //name = grand
    try {
       let total = await getAllInfo();
+
+      
         
       // console.log(total)
       if(name) {
@@ -19,6 +22,7 @@ router.get('/', async(req, res) => {
          res.status(OK).send(found) : 
          res.status(NOT_FOUND).send('Game not found...');
       } else {
+         // console.log(total.length)
          res.status(OK).send(total);
       }
    } catch(err) {
@@ -58,15 +62,15 @@ router.post('/', async(req, res) => {
          }
       }
       
-            console.log(
-               name,
-               description,
-               platform,
-               released,
-               rating,
-               image,
-               genre
-            )
+            // console.log(
+            //    name,
+            //    description,
+            //    platform,
+            //    released,
+            //    rating,
+            //    image,
+            //    genre
+            // )
       
       const createdVideogame = await Videogame.create({
          name: name,

@@ -1,0 +1,8 @@
+rutas: 
+    landingPge
+    home:
+        input de buscar
+        listado de juegos
+        filtros
+        paginado
+    detalles

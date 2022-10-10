@@ -3,9 +3,9 @@ const { Videogame, Genre } = require("../db");
 const { API_KEY } = process.env;
 const router = Router();
 const axios = require('axios');
-const { getDbInfo, getAllInfo, getApiInfo, getId } = require('../controllers/gamesC');
+// const { getDbInfo, getAllInfo, getApiInfo, getId } = require('../controllers/gamesC');
 const { OK, CREATED, BAD_REQUEST, NOT_FOUND } = require('../controllers/statusVar');
-const { getAllGenres } = require('../controllers/genresC')
+// const { getAllGenres } = require('../controllers/genresC')
 
 
 router.get('/', async(_req, res) => {
