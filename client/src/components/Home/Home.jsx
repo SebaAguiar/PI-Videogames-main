@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getVideogames, filterByGenre } from '../../actions/actions';
+import { getVideogames, filterByGenre, getGenres } from '../../actions/actions';
 import { Link } from 'react-router-dom'
 import Card from '../Card/Card';
 import Page from '../Page/Page';
@@ -22,7 +22,11 @@ function Home() {
 
    useEffect(() => {
       dispatch(getVideogames())
-   }, [])
+   }, [dispatch])
+
+   useEffect(() => {
+      dispatch(getGenres())
+   }, [dispatch])
 
    const handleClick = (e) => {
       e.preventDefault()

@@ -13,6 +13,14 @@ export const getVideogames = () => {
     }  
 }
 
+export const getGenres = () => {
+    return async(dispatch) =>{
+        return fetch('http://localhost:3001/genres')
+        .then(res => res.json())
+        .then(data => dispatch({type: 'GET_GENRES', payload: data}))
+    }  
+}
+
 export const filterByGenre = (payload) => {
     return {
         type: 'FILTER_BY_GENRE',
