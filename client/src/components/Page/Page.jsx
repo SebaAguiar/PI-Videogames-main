@@ -14,7 +14,7 @@ function Page({gamesPerPage, allVideogames, page}) {
             {
                pageNum?.map(n => (
                   <li className='number' key={n}>
-                     <a onClick={() => page(n)}>{n}</a>
+                     <button className='pageButton'  onClick={() => page(n)}>{n}</button>
                   </li>
                ))
             }

@@ -20,11 +20,13 @@ module.exports = (sequelize) => {
       },
       released: {
          type: DataTypes.STRING,
-         allowNull: true
+         allowNull: true,
+         defaultValue: 'Unknown'
       },
       rating: {
-         type: DataTypes.INTEGER,
-         allowNull: true
+         type: DataTypes.DECIMAL,
+         allowNull: true,
+         defaultValue: 0
       },
       image: {
          type:DataTypes.TEXT,

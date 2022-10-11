@@ -80,6 +80,12 @@ router.post('/', async(req, res) => {
          image: image
       })
 
+      // genre.map(async e => {
+      //    const found = await Genre.findAll({
+      //       where: {name: e}
+      //    })
+      //    createdVideogame.addGenre(found)
+      // })
       genre.forEach(async e => {
          const found = await Genre.findAll({
             where: {name: e}
@@ -91,7 +97,7 @@ router.post('/', async(req, res) => {
          const found = await Platform.findAll({
             where: {name: e}
          })
-         createdVideogame.addPlatform(found)
+         createdVideogame.addPlatform(found.map(e => e.name)) //
       })
       console.log(createdVideogame);
       res.status(CREATED).send(createdVideogame);    

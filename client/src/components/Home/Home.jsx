@@ -1,36 +1,53 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getVideogames, filterByGenre, getGenres } from '../../actions/actions';
+import { getVideogames, filterByGenre, getGenres, filterByRating, sortByName, getById, filterApiDb } from '../../actions/actions';
 import { Link } from 'react-router-dom'
 import Card from '../Card/Card';
 import Page from '../Page/Page';
+import SearchBar from '../SearchBar/SearchBar';
 function Home() {
 
    const [gamesPerPage, setGamesPerPage] = useState(15)
    const [currentPage, setCurrentPage] = useState(1)
    const [order, setOrder] = useState('')
+   const genres = useSelector(state => state.genres)
    const dispatch = useDispatch()
    const allVideogames = useSelector(state => state.videogames)
    const indexOfLastGame = currentPage * gamesPerPage
    const indexOfFirstGame = indexOfLastGame - gamesPerPage
    const currentGames = allVideogames.slice(indexOfFirstGame, indexOfLastGame)
    
+   
+   useEffect(() => {
+      dispatch(getVideogames())
+   }, [dispatch])
+   
+   useEffect(() => {
+      dispatch(getGenres())
+   }, [dispatch])
+   
    const page = (pageNum) => {
       setCurrentPage(pageNum)
    }
 
-   useEffect(() => {
-      dispatch(getVideogames())
-   }, [dispatch])
-
-   useEffect(() => {
-      dispatch(getGenres())
-   }, [dispatch])
-
    const handleClick = (e) => {
       e.preventDefault()
       dispatch(getVideogames())
+   }
+
+   const handleSortByName = (e) => {
+      e.preventDefault()
+      dispatch(sortByName(e.target.value))
+      setCurrentPage(1)
+      setOrder(`Order ${e.target.value}`)
+   }
+
+   const handleSortByRating = (e) => {
+      e.preventDefault()
+      dispatch(filterByRating(e.target.value))
+      setCurrentPage(1)
+      setOrder(`Order ${e.target.value}`)
    }
 
    const handleFilterByGenre = (e) => {
@@ -39,47 +56,46 @@ function Home() {
       setCurrentPage(1)
       setOrder(`Order ${e.target.value}`)
    }
+
+   const handleFilterApiDb = (e) => {
+      e.preventDefault()
+      dispatch(filterApiDb(e.target.value))
+      setCurrentPage(1)
+      setOrder(`Order ${e.target.value}`)
+      
+   }
    return (
       <div>
-         <Link to='/videogames'>New Game</Link>
+         <Link to='/form'><button>Create Videogame</button></Link>
          <h1>Videogames everywhere</h1>
          <button onClick={e => {handleClick(e)}}>Recharge</button>
-
+         <div className='searchBar'>
+            <SearchBar />
+         </div>
          <div>
-            <select name="" id="">
-               <option value="asc">Ascending</option>
-               <option value="desc">Descending</option>
+            <select onChange={e => handleSortByName(e)}>
+               <option value="-">-</option>
+               <option value="A-Z">A-Z</option>
+               <option value="Z-A">Z-A</option>
             </select>
-            <select name="" id="">
-                <option value="rAsc">Ascending</option>
-                <option value="rDesc">Descending</option>
+            <select onChange={e => handleSortByRating(e)}>
+               <option value="-">-</option>
+               <option value="higher">Higher</option>
+               <option value="lower">Lower</option>
             </select>
-            <select name="" id="">
+            <select onChange={e => handleFilterApiDb(e)}>
                <option value="all">All</option>
                <option value="db">Data Base</option>
                <option value="api">Api</option>
             </select>
-            <select onChange={e => handleFilterByGenre(e)}>
+            
+            <select  onChange={e => handleFilterByGenre(e)}>
                <option value="All">All</option>
-               <option value="Action">Action</option>
-               <option value="Indie">Indie</option>
-               <option value="Adventure">Adventure</option>
-               <option value="RPG">RPG</option>
-               <option value="Strategy">Strategy</option>
-               <option value="Shooter">Shooter</option>
-               <option value="Casual">Casual</option>
-               <option value="Simulation">Simulation</option>
-               <option value="Puzzle">Puzzle</option>
-               <option value="Arcade">Arcade</option>
-               <option value="Platformer">Platformer</option>
-               <option value="Racing">Racing</option>
-               <option value="Massively Multiplayer">Massively Multiplayer</option>
-               <option value="Sports">Sports</option>
-               <option value="Fighting">Fighting</option>
-               <option value="Family">Family</option>
-               <option value="Board Games">Board Games</option>
-               <option value="Educational">Educational</option>
-               <option value="Card">Card</option>
+              {
+               genres.map(g => (
+                  <option value={g.name}>{g.name}</option>
+               ))
+              }
             </select>
          </div>
 
@@ -94,12 +110,13 @@ function Home() {
          currentGames?.map(e => {
             // console.log(e.genres)
             return (
-                  <Link to={`/videogames?name=${e.name}`}>
+                  <Link to={`/videogames/${e.id}`}>
                      <Card 
-                        key={e.id} 
+                        key={e.id}
                         name={e.name} 
                         image={e.image} 
-                        genres={e.genres.map(e => e.concat(', '))} 
+                        genres={e.genres} 
+                        rating={e.rating}
                      />
                   </Link>               
             )
