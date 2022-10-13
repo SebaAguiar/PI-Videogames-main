@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Baumans&family=Poppins&display=swap');
+
+
+.home {
+  position: relative;
+  background-image: url(../../imagenes/collage.png.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-color: rgba(26, 30, 39, 0.78);
+  height: 100vh;
+  font-family: 'Baumans', cursive;
+}
+
+.container_videogames_title {
+  text-align: center;
+  padding: 70px;
+  color: red;
+  text-shadow: 2px 2px #c6b7b7;
+}
+
+.videogames_title {
+  margin: 0;
+  letter-spacing: 10px;
+  font-size: 40px;
+}
+
+.videogames_button {
+  color: #f21743;
+  padding: 20px 50px;
+  background-color: rgba(26, 30, 39, 0.78);
+  border-radius: 10px;
+}
+
+.container_videogames_button {
+  text-align: center;
+    padding: 35px;
+}
+

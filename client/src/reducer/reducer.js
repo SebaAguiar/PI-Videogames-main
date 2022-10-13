@@ -15,7 +15,8 @@ const reducer = (state = initialState, action) => {
 
       case 'GET_VIDEOGAMES':
          try {
-
+            // console.log(state.videogames)
+            // console.log(action.payload[0])
             return {
                ...state,
                videogames: action.payload,
@@ -38,6 +39,7 @@ const reducer = (state = initialState, action) => {
       case 'FILTER_BY_GENRE':
          try {
             const allVideogames = state.videogamesCopy
+            console.log(action.payload)
             const filtered = action.payload === 'All' ? allVideogames : allVideogames.filter(e => e.genres.includes(action.payload))
             return {
                ...state,
@@ -122,6 +124,7 @@ const reducer = (state = initialState, action) => {
       //////      GET GAME BY ID 
       
       case 'GET_BY_ID':
+         // console.log(action.payload)
          return {
             ...state,
             gameid: action.payload

@@ -5,37 +5,73 @@ import { useParams } from 'react-router-dom';
 import { getById } from '../../actions/actions'
 import Nav from '../Nav/Nav';
 import { Link } from 'react-router-dom'
+import './Description.css'
 
 function Description(prop) {
-   console.log(prop)
+   // console.log(prop.params.id)
    const dispatch = useDispatch()
+   const [loading, setLoading] = useState(true);
 
 
 
    useEffect(() => {
       dispatch(getById(prop.match.params.id))
+      setLoading(false);
    }, [dispatch])
 
    const videogame = useSelector(state => state.gameid)
+   const videogame2 = videogame[0]
+   console.log(videogame)
+   console.log(videogame2)
+   let genres = []
+   let platforms = []
+   if(videogame2) {
+      genres = videogame2.genres.map(e => e.name)
+      platforms = videogame2.platforms.map(e => e.name)
+   }
+  
 
    return (
-      <div>
-         <div>
+      <div className='container'>
+         <Link to='/videogames'>
+         <div className='descriptionNav'>
             <Nav />
          </div>
+         </Link>
+         {loading && <div className="loadingDetail">
+            <div>
+              <h1 className="messageDetail">Loading...</h1>
+            </div>
+          </div>}
             {
-               videogame.length > 0 ? 
-               <div>
-               <h1 className='name'>{videogame[0].name}</h1>
-               <img src={videogame[0].image} alt={videogame[0].name} />
-               <h3>popularity: {videogame[0].rating}</h3>
-               <h4>{videogame[0].genres}</h4>
-               <h4>{videogame[0].platforms}</h4>
-               <p>{videogame[0].descriptionMin[0]}</p>
-               <p>{videogame[0].descriptionRec[0]}</p>
-               <p>Released at: {videogame[0].released}</p>
+               videogame2 === 'undefined' ? 
+               <div className='descriptionContainer'>
+                  <div className='imgContainer'>
+               <h1 className='videogameName'>{videogame2.name}</h1>
+               <h3 className='ratingDetail general'>populariy: {videogame2.rating}</h3>
+               <h4 className='genresDetail general'>{genres.join(', ')}</h4>
+               <h4 className='platformDetail general'>{platforms.join(', ')}</h4>
+               <img className='imageDetail' src={videogame2.image} alt={videogame2.name} />
+               </div>
+               <div className='detailContainer'>
+               <p className='descriptionDetail general'>{videogame2.description}</p>
+               <p className='releasedDetail general'>Released at: {videogame2.released}</p>
+               </div>
             </div> :
-            'error 404'
+            <div className='descriptionContainer'>
+               <div className='imgContainer'>
+               <h1 className='videogameName'>{videogame.name}</h1>
+               <h3 className='ratingDetail general'>populariy: {videogame.rating}</h3>
+               <h4 className='genresDetail general'>{videogame.genres}</h4>
+               <h4 className='platformDetail general'>{videogame.platforms}</h4>
+               <img className='imageDetail' src={videogame.image} alt={videogame.name} />
+               </div>
+               <div className='detailContainer'>
+               <p className='descriptionDetail general'>{videogame.descriptionMin}</p>
+               <p className='descriptionDetail general'>{videogame.descriptionRec}</p>
+               <p className='releasedDetail general'>Released at: {videogame.released}</p>
+               </div>
+            </div>
             }
       </div>
    )

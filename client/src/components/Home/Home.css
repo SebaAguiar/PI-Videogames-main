@@ -1,0 +1,59 @@
+body {
+
+}
+.back-ground {
+  background-image: url(https://wallpapercave.com/wp/wp5215702.jpg);
+  background-size: 100%;
+  }
+  
+.cards {
+  display: grid;
+  grid-template-columns: repeat(5, 200px);
+  gap: 40px;
+  margin-top: 60px;
+  background: rgba(26, 30, 39, 0.78);
+  border-radius: 20px;
+  justify-content: center;
+  padding: 100px 0;
+}
+
+.page {
+width: 150vh;
+display: flex;
+justify-content: center;
+padding-left:  20px;
+
+}
+.contenedor_header {
+  display: flex;
+  justify-content: flex-end;
+  padding: 20px 60px;
+}
+
+.tilte {
+  text-align: center;
+  color: white;
+  background-color: rgba(23, 23, 23, 0.528);
+  padding: 40px;
+}
+
+.btn_crear {
+  margin: 0 30px;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: rgb(96, 85, 85) ;
+}
+
+.allSelects {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 60px
+}
+
+.select {
+  margin: 35px 8px;
+  border-radius: 8px;
+  height: 30px;
+  color: brown;
+  background-color: black;
+}

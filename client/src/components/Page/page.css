@@ -1,0 +1,18 @@
+.container_page {
+   
+}
+
+
+.page {
+    display: flex;
+    list-style: none;
+}
+
+.pageButton {
+    padding: 10px;
+    margin: 3px;
+    background-color: rgba(157, 45, 45, 0.987);
+    color: white;
+    border-radius: 10px;
+
+}

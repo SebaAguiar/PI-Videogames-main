@@ -11,19 +11,20 @@ router.get('/', async(req, res) => {
    try {
       let total = await getAllInfo();
 
-      
+      // let total2 = total.map(e => typeof e.id === 'string' ? total.concat(e) : e)
         
       // console.log(total)
       if(name) {
          let found = await total.filter(
                f => f.name.toLowerCase().includes(name.toLowerCase())
          )
+         console.log(found)
          found.length ? 
          res.status(OK).send(found) : 
          res.status(NOT_FOUND).send('Game not found...');
       } else {
          // console.log(total.length)
-         res.status(OK).send(total);
+         res.status(OK).send(total.flat());
       }
    } catch(err) {
       console.log(err);
@@ -35,7 +36,9 @@ router.get('/:id', async(req, res) => {
    const { id } = req.params
    try { 
       const allIds = await getId(id);
+      // console.log(allIds)
       allIds ? res.status(OK).send(allIds) : res.status(NOT_FOUND).send('Game not found...')
+
    } catch(err) {
       console.log(err)
       res.status(NOT_FOUND).send('Game not found...')
@@ -47,11 +50,11 @@ router.post('/', async(req, res) => {
       let {
          name,
          description,
-         platform,
+         platforms,
          released,
          rating,
          image,
-         genre
+         genres
       } = req.body;
       
       if(!image) {
@@ -65,11 +68,11 @@ router.post('/', async(req, res) => {
             // console.log(
             //    name,
             //    description,
-            //    platform,
+            //    platforms,
             //    released,
             //    rating,
             //    image,
-            //    genre
+            //    genres
             // )
       
       const createdVideogame = await Videogame.create({
@@ -86,20 +89,23 @@ router.post('/', async(req, res) => {
       //    })
       //    createdVideogame.addGenre(found)
       // })
-      genre.forEach(async e => {
+      genres.forEach(async e => {
          const found = await Genre.findAll({
             where: {name: e}
          })
+         // console.log(found)
          createdVideogame.addGenre(found)
       })
       
-      platform.forEach(async e => {
+      platforms.forEach(async e => {
+         // console.log(e)
          const found = await Platform.findAll({
             where: {name: e}
          })
-         createdVideogame.addPlatform(found.map(e => e.name)) //
+         createdVideogame.addPlatform(found) 
+         // console.log(found)
       })
-      console.log(createdVideogame);
+      // console.log(createdVideogame);
       res.status(CREATED).send(createdVideogame);    
    } catch (err) {
       console.log(err)

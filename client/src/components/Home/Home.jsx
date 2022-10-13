@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom'
 import Card from '../Card/Card';
 import Page from '../Page/Page';
 import SearchBar from '../SearchBar/SearchBar';
+import './Home.css'
 function Home() {
 
    const [gamesPerPage, setGamesPerPage] = useState(15)
@@ -64,66 +65,78 @@ function Home() {
       setOrder(`Order ${e.target.value}`)
       
    }
-   return (
-      <div>
-         <Link to='/form'><button>Create Videogame</button></Link>
-         <h1>Videogames everywhere</h1>
-         <button onClick={e => {handleClick(e)}}>Recharge</button>
-         <div className='searchBar'>
+return (
+   <div className='back-ground'>
+         <h1 className='tilte' >Videogames everywhere</h1>
+      <div className='contenedor_header'>
+         <Link to='/form'><button className='btn_crear'>Create Videogame</button></Link>
+         <button className='btn_recargar' onClick={e => {handleClick(e)}}>Recharge</button>
+      </div>
+ 
+{/* /////////   FILTROS   /////////////// */}
+
+         <div className='allSelects'>
+            <div>
+               <select className='select' onChange={e => handleSortByName(e)}>
+                  <option value="-">-</option>
+                  <option value="A-Z">A-Z</option>
+                  <option value="Z-A">Z-A</option>
+               </select>
+               <select className='select' onChange={e => handleSortByRating(e)}>
+                  <option value="-">-</option>
+                  <option value="higher">Higher</option>
+                  <option value="lower">Lower</option>
+               </select>
+               <select className='select' onChange={e => handleFilterApiDb(e)}>
+                  <option value="all">All</option>
+                  <option value="db">Data Base</option>
+                  <option value="api">Api</option>
+               </select>            
+               <select className='select'  onChange={e => handleFilterByGenre(e)}>
+                  <option value="All">All</option>
+               {
+                  genres.map(g => (
+                     <option value={g.name}>{g.name}</option>
+                     ))
+                     }
+               </select>
+            </div>
             <SearchBar />
          </div>
-         <div>
-            <select onChange={e => handleSortByName(e)}>
-               <option value="-">-</option>
-               <option value="A-Z">A-Z</option>
-               <option value="Z-A">Z-A</option>
-            </select>
-            <select onChange={e => handleSortByRating(e)}>
-               <option value="-">-</option>
-               <option value="higher">Higher</option>
-               <option value="lower">Lower</option>
-            </select>
-            <select onChange={e => handleFilterApiDb(e)}>
-               <option value="all">All</option>
-               <option value="db">Data Base</option>
-               <option value="api">Api</option>
-            </select>
-            
-            <select  onChange={e => handleFilterByGenre(e)}>
-               <option value="All">All</option>
-              {
-               genres.map(g => (
-                  <option value={g.name}>{g.name}</option>
-               ))
-              }
-            </select>
-         </div>
 
-         <Page 
-         gamesPerPage={gamesPerPage} 
-         allVideogames={allVideogames.length} 
-         page={page}
-         />
-         <div>
+{/*
+/////////   CARDS   /////////////// */}
 
-      {
-         currentGames?.map(e => {
-            // console.log(e.genres)
-            return (
-                  <Link to={`/videogames/${e.id}`}>
-                     <Card 
-                        key={e.id}
-                        name={e.name} 
-                        image={e.image} 
-                        genres={e.genres} 
-                        rating={e.rating}
-                     />
-                  </Link>               
-            )
-         })
-      }
+   <div className='cards'>
+         {
+            currentGames?.map(e => {
+               // console.log(e.genres)
+               // console.log(currentGames)
+               return (
+                     <Link to={`/videogames/${e.id}`}>
+                        <Card
+                           key={e.id}
+                           name={e.name} 
+                           image={e.image} 
+                           genres={e.genres} 
+                           rating={e.rating}
+                        />
+                     </Link>               
+               )
+            })
+         }
+   
+{/* /////////   PAGINADO   /////////////// */}
+
+         <div className='page'>
+            <Page 
+            gamesPerPage={gamesPerPage} 
+            allVideogames={allVideogames.length} 
+            page={page}
+            />
          </div>
-      </div>
+   </div>
+</div>
 
    )
 }

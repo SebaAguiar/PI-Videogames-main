@@ -3,6 +3,8 @@ import React from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import { postVideogame, getGenres, getPlatforms, getVideogames } from '../../actions/actions'
 import { useDispatch, useSelector } from "react-redux"
+import Nav from '../Nav/Nav'
+import './Form.css'
 
 const validate = (input) => {
    let errors = {}
@@ -102,58 +104,62 @@ function Form() {
 
 
    return (
-      <div>
-         <Link to='/videogames'>
-            <button>Home</button>
-         </Link>
-         <h1>CEATE YOUR VIDEOGAME!</h1>
-         <form onSubmit={e => handleSubmit(e)}>
-            <div>
+      <div className="contenedor_general">
+         <div className="contenedor_link">
+            <Link className="link" to='/videogames'>
+               <Nav />
+            </Link>
+         </div>
+         <h1 className="title">CEATE YOUR VIDEOGAME!</h1>
+         <form className="form" onSubmit={e => handleSubmit(e)}>
+               <div className="container_form">
+            <div className="name input_form">
                <label>Name:</label>
-               <input onChange={e => handleChange(e)} type="text" value={input.name} name="name" />
+               <input className="inputName" onChange={e => handleChange(e)} type="text" value={input.name} name="name" />
                {errors.name && (
                   <p className="error">{errors.name}</p>
                )}
             </div>
-            <div>
-               <label>Description:</label>
-               <input onChange={e => handleChange(e)} type="text" value={input.description} name="description" />
-               {errors.description && (
-                  <p className="error">{errors.description}</p>
-               )}
-            </div>
-            <div>
-               <label>Released:</label>
-               <input onChange={e => handleChange(e)} type="text" value={input.released} name="released" />
-            </div>
-            <div>
-               <label>Rating:</label>
-               <input onChange={e => handleChange(e)} type="text" value={input.rating} name="rating" />
-            </div>
-            <div>
-               <label>Image:</label>
-               <input onChange={e => handleChange(e)} type="text" value={input.image} name="image" />
-            </div>
-            <div>
-            <p>Genres:</p>
-            {
-               genre.map(g => (
-                 
-                  <label><input onChange={e => handleGenreCheck(e)} key={g.id} type='checkbox' name={g.name} value={g.name} />{g.name} {errors.genre && (
-                     <p className="error">{errors.genre}</p>
-                  )}</label>
-               ))
-            }
-            </div>
-            <div> 
-            <p>Platforms:</p>
-            {
-               platform.map(g => (
-                  <label><input onChange={e => handlePlatformCheck(e)} key={g.id} type='checkbox' name={g.name} value={g.name} />{g.name} {errors.platform && (
-                     <p className="error">{errors.platform}</p>
-                  )}</label>
-               ))
-            }
+               <div className="description input_form">
+                  <label>Description:</label>
+                  <input className="inputDescription" onChange={e => handleChange(e)} type="text" value={input.description} name="description" />
+                  {errors.description && (
+                     <p className="error">{errors.description}</p>
+                  )}
+               </div>
+               <div className="realesed input_form">
+                  <label>Released:</label>
+                  <input className="inputReleased" onChange={e => handleChange(e)} type="text" value={input.released} name="released" />
+               </div>
+               <div className="rating input_form">
+                  <label>Rating:</label>
+                  <input className="inputRating " onChange={e => handleChange(e)} type="text" value={input.rating} name="rating" />
+               </div>
+               <div className="image input_form">
+                  <label>Image:</label>
+                  <input className="inputImage" onChange={e => handleChange(e)} type="text" value={input.image} name="image" />
+               </div>
+               <p>Genres:</p>
+               <div className="genres">
+               {
+                  genre.map(g => (
+                  
+                     <label><input className="inputGenres" onChange={e => handleGenreCheck(e)} key={g.id} type='checkbox' name={g.name} value={g.name} />{g.name} {errors.genre && (
+                        <p className="error">{errors.genre}</p>
+                     )}</label>
+                  ))
+               }
+               </div>
+               <p className="p_platforms">Platforms:</p>
+               <div className="platforms"> 
+               {
+                  platform.map(g => (
+                     <label><input className="inputPlatform" onChange={e => handlePlatformCheck(e)} key={g.id} type='checkbox' name={g.name} value={g.name} />{g.name} {errors.platform && (
+                        <p className="error">{errors.platform}</p>
+                     )}</label>
+                  ))
+               }
+               </div>
             </div>
 
             <button type="submit">Submit</button>

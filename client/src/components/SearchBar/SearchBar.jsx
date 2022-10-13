@@ -2,7 +2,7 @@ import React from 'react'
 import { getByName } from '../../actions/actions'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
-
+import './SearchBar.css'
 
 function SearchBar() {
    const dispatch = useDispatch()
@@ -16,12 +16,12 @@ function SearchBar() {
    const handleClick = (e) => {
       e.preventDefault()
       dispatch(getByName(name))
-      name('')
+      
    }
 
    return (
       <div className='SearchBar'>
-         <input type="text" className='input' placeholder='Search...' onChange={e => handleInputChange(e)} />
+         <input  className= 'input_searchbar' type="text" placeholder='Search...' onChange={e => handleInputChange(e)} />
          <button className='searchButton' onClick={e => handleClick(e)}>Search</button>
       </div>
    )

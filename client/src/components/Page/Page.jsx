@@ -1,4 +1,5 @@
 import React from 'react'
+import './page.css'
 
 
 function Page({gamesPerPage, allVideogames, page}) {
@@ -9,7 +10,7 @@ function Page({gamesPerPage, allVideogames, page}) {
       
    }
    return(
-      <nav>
+      <nav className='container_page'>
          <ul className='page'>
             {
                pageNum?.map(n => (
