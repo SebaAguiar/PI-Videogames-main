@@ -104,38 +104,38 @@ function Form() {
 
 
    return (
-      <div className="contenedor_general">
-         <div className="contenedor_link">
-            <Link className="link" to='/videogames'>
+      <div className="container">
+         <div className="navContainer">
+            <Link className="nav" to='/videogames'>
                <Nav />
             </Link>
          </div>
          <h1 className="title">CEATE YOUR VIDEOGAME!</h1>
          <form className="form" onSubmit={e => handleSubmit(e)}>
-               <div className="container_form">
-            <div className="name input_form">
+               <div className="formContainer">
+            <div className="name formInput">
                <label>Name:</label>
                <input className="inputName" onChange={e => handleChange(e)} type="text" value={input.name} name="name" />
                {errors.name && (
                   <p className="error">{errors.name}</p>
                )}
             </div>
-               <div className="description input_form">
+               <div className="description formInput">
                   <label>Description:</label>
                   <input className="inputDescription" onChange={e => handleChange(e)} type="text" value={input.description} name="description" />
                   {errors.description && (
                      <p className="error">{errors.description}</p>
                   )}
                </div>
-               <div className="realesed input_form">
+               <div className="realesed formInput">
                   <label>Released:</label>
                   <input className="inputReleased" onChange={e => handleChange(e)} type="text" value={input.released} name="released" />
                </div>
-               <div className="rating input_form">
+               <div className="rating formInput">
                   <label>Rating:</label>
                   <input className="inputRating " onChange={e => handleChange(e)} type="text" value={input.rating} name="rating" />
                </div>
-               <div className="image input_form">
+               <div className="image formInput">
                   <label>Image:</label>
                   <input className="inputImage" onChange={e => handleChange(e)} type="text" value={input.image} name="image" />
                </div>
@@ -150,7 +150,7 @@ function Form() {
                   ))
                }
                </div>
-               <p className="p_platforms">Platforms:</p>
+               <p className="pPlatforms">Platforms:</p>
                <div className="platforms"> 
                {
                   platform.map(g => (

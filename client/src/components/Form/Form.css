@@ -1,15 +1,15 @@
-.contenedor_general {
+.container {
     background-image: url(https://wallpapercave.com/wp/wp5215702.jpg);
     background-color: rgba(104, 100, 100, 0.566);
 }
 
-.contenedor_link {
+.navContainer {
     height: 10px;
     padding: 20px;
 
 }
 
-.link {
+.nav {
     color: rgb(203, 79, 89);
     text-decoration: none;
     font-size: 20px;
@@ -25,20 +25,18 @@
 
 }
 
-.form {
 
-}
 label{
     display: inline-block;
     width: 90px;
   } 
 
-.input_form {
+.formInput {
     padding: 10px;
     
 }
 
-.container_form {
+.formContainer {
     color: white;
     font-size: 20px;
 }
@@ -60,6 +58,6 @@ label{
     display: inline-flex;
 }
 
-.p_platforms {
+.pPlatforms {
     padding: 20px;
 }
