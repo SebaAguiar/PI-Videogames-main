@@ -1,14 +1,13 @@
 import React, { useState } from 'react'
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
 import { getById } from '../../actions/actions'
 import Nav from '../Nav/Nav';
 import { Link } from 'react-router-dom'
 import './Description.css'
 
 function Description(prop) {
-   // console.log(prop.params.id)
+   // console.log(prop.match.params.id)
    const dispatch = useDispatch()
    const [loading, setLoading] = useState(true);
 
@@ -20,14 +19,16 @@ function Description(prop) {
    }, [dispatch])
 
    const videogame = useSelector(state => state.gameid)
-   const videogame2 = videogame[0]
-   console.log(videogame)
-   console.log(videogame2)
+
+   // console.log('consoleLog1', videogame)
+
    let genres = []
    let platforms = []
-   if(videogame2) {
-      genres = videogame2.genres.map(e => e.name)
-      platforms = videogame2.platforms.map(e => e.name)
+
+   
+   if(videogame.createdInDb) {
+      genres = videogame.genres.map(e => e.name ? e.name : e)
+      platforms = videogame.platforms.map(e => e.name ? e.name : e)
    }
   
 
@@ -43,36 +44,43 @@ function Description(prop) {
               <h1 className="messageDetail">Loading...</h1>
             </div>
           </div>}
+          <div className='generalContainer'>
+            <div className='containerDetailTitle'>
+            <h1 className='detailTitle'>Game Details</h1>
+            </div>
             {
-               videogame2 === 'undefined' ? 
+               
+               (videogame.createdInDb) ? 
                <div className='descriptionContainer'>
                   <div className='imgContainer'>
-               <h1 className='videogameName'>{videogame2.name}</h1>
-               <h3 className='ratingDetail general'>populariy: {videogame2.rating}</h3>
+               <h1 className='videogameName'>{videogame.name}</h1>
+               <h3 className='ratingDetail general'>populariy: {videogame.rating}</h3>
                <h4 className='genresDetail general'>{genres.join(', ')}</h4>
                <h4 className='platformDetail general'>{platforms.join(', ')}</h4>
-               <img className='imageDetail' src={videogame2.image} alt={videogame2.name} />
+               <img className='imageDetail' src={videogame.image} alt={videogame.name} />
+               <p className='releasedDetail general'>Released at: {videogame.released}</p>
                </div>
                <div className='detailContainer'>
-               <p className='descriptionDetail general'>{videogame2.description}</p>
-               <p className='releasedDetail general'>Released at: {videogame2.released}</p>
+               <p className='descriptionDetail general'>{videogame.description}</p>
                </div>
             </div> :
+            
             <div className='descriptionContainer'>
+               {console.log('div2')}
                <div className='imgContainer'>
                <h1 className='videogameName'>{videogame.name}</h1>
                <h3 className='ratingDetail general'>populariy: {videogame.rating}</h3>
                <h4 className='genresDetail general'>{videogame.genres}</h4>
                <h4 className='platformDetail general'>{videogame.platforms}</h4>
                <img className='imageDetail' src={videogame.image} alt={videogame.name} />
+               <p className='releasedDetail general'>Released at: {videogame.released}</p>
                </div>
                <div className='detailContainer'>
-               <p className='descriptionDetail general'>{videogame.descriptionMin}</p>
-               <p className='descriptionDetail general'>{videogame.descriptionRec}</p>
-               <p className='releasedDetail general'>Released at: {videogame.released}</p>
+               <p className='descriptionDetail general'>{videogame.description}</p>
                </div>
             </div>
             }
+            </div>
       </div>
    )
 }

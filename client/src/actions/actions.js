@@ -11,18 +11,12 @@ export const getVideogames = () => {
             type: 'GET_VIDEOGAMES',
             payload: json.data
         })
-    // return fetch('http://localhost:3001/videogames')
-    // .then(res => res.json())
-    // .then(data => dispatch({type: 'GET_VIDEOGAMES', payload: data}))
+
     }  
 }
 
 export const getGenres = () => {
-    // return async(dispatch) =>{
-    //     return fetch('http://localhost:3001/genres')
-    //     .then(res => res.json())
-    //     .then(data => dispatch({type: 'GET_GENRES', payload: data}))
-    // }  
+ 
     return async(dispatch) => {
 
         let json = await axios.get('http://localhost:3001/genres')
@@ -74,7 +68,7 @@ export const getById = (id) => {
    return async(dispatch) => {
       try {
          const json = await axios.get(`http://localhost:3001/videogames/${id}`)
-         // console.log(json.data)
+         console.log(json.data)
          return dispatch({
             type: 'GET_BY_ID',
             payload: json.data
@@ -97,6 +91,7 @@ export const postVideogame = (payload) => {
       try {
          // console.log(payload)
          const json = await axios.post('http://localhost:3001/videogames', payload)
+         // console.log(json.data)
          return dispatch({
             type: 'POST_VIDEOGAME',
             payload: json.data

@@ -6,13 +6,14 @@
 .searchButton {
     padding: 7px;
     margin-left: 15px;
-    background-color: rgba(157, 45, 45, 0.987);
+    background-color: rgba(96, 85, 85, 0.987);
     border-radius: 10px;
     
 }
 
 .input_searchbar {
    padding: 7px;
-   background-color: rgba(157, 45, 45, 0.987);
+   background-color: rgba(96, 85, 85, 0.987);
     border-radius: 10px;
+    color: black;
 }

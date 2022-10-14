@@ -11,14 +11,14 @@ const validate = (input) => {
    if(!input.name) {
       errors.name = 'Name must be completed'
    }
-   if(!input.platform) {
-      errors.platform = 'Platform must be completed'
+   if(!input.platforms) {
+      errors.platforms = 'Platform must be completed'
    }
    if(!input.description) {
       errors.description = 'Description must be completed'
    }
-   if(!input.genre) {
-      errors.genre = 'Description must be completed'
+   if(!input.genres) {
+      errors.genres = 'Description must be completed'
    }
    return errors
 }
@@ -27,16 +27,16 @@ const validate = (input) => {
 function Form() {
    const dispatch = useDispatch()
    const history = useHistory()
-   const genre = useSelector((state) => state.genres)
-   const platform = useSelector((state) => state.platforms)
+   const genres = useSelector((state) => state.genres)
+   const platforms = useSelector((state) => state.platforms)
    const videogames = useSelector((state) => state.videogamesCopy)
    const [errors, setErrors] = useState({})
    const [input, setInput] = useState({
       name: '',
       description: '',
-      platform: [], 
+      platforms: [], 
       released: '',
-      genre:[],
+      genres:[],
       rating: '',
       image: ''
    })
@@ -59,47 +59,48 @@ function Form() {
 
    const handleSubmit = (e) => {
       e.preventDefault()
-      console.log(input)
+      // console.log(input)
       dispatch(postVideogame(input))
       alert('Videogame successfully created')
       setInput({
          name: '',
          description: '',
-         platform: [], 
+         platforms: [], 
          released: '',
-         genre:[],
+         genres:[],
          rating: '',
          image: ''
       })
       history.push('/videogames')
    }
 
-   const handleGenreCheck = (e) => {
-      if (e.target.checked) {
-         setInput({
-            ...input,
-            genre: [...input.genre, e.target.value]
-         })
-         setErrors(validate({
-            ...input,
-            [e.target.name]: e.target.value
-         }))
-         // console.log(input)
-      }
+   const handleGenreSelect = (e) => {
+      setInput({
+         ...input,
+         genres: [...input.genres, e.target.value]
+      })
    }
 
-   const handlePlatformCheck = (e) => {
-      if (e.target.checked) {
-         setInput({
-            ...input,
-            platform: [...input.platform, e.target.value]
-         })
-         setErrors(validate({
-            ...input,
-            [e.target.name]: e.target.value
-         }))
-         // console.log(input)
-      }
+
+   const handlePlatformSelect = (e) => {
+      setInput({
+         ...input,
+         platforms: [...input.platforms, e.target.value]
+      })
+   }
+
+   const handleGenresDelete = (e) => {
+      setInput({
+         ...input,
+         genres: input.genres.filter(g => g !== e)
+      })
+   }
+
+   const handlePlatformsDelete = (e) => {
+      setInput({
+         ...input,
+         platforms: input.platforms.filter(p => p !== e)
+      })
    }
 
 
@@ -128,12 +129,12 @@ function Form() {
                   )}
                </div>
                <div className="realesed formInput">
-                  <label>Released:</label>
-                  <input className="inputReleased" onChange={e => handleChange(e)} type="text" value={input.released} name="released" />
+                  <label>Released:</label> 
+                  <input className="inputReleased" onChange={e => handleChange(e)} type="date" value={input.released} name="released" />
                </div>
                <div className="rating formInput">
                   <label>Rating:</label>
-                  <input className="inputRating " onChange={e => handleChange(e)} type="text" value={input.rating} name="rating" />
+                  <input className="inputRating " onChange={e => handleChange(e)} type="number" min='1' max='5' value={input.rating} name="rating" />
                </div>
                <div className="image formInput">
                   <label>Image:</label>
@@ -141,29 +142,44 @@ function Form() {
                </div>
                <p>Genres:</p>
                <div className="genres">
-               {
-                  genre.map(g => (
-                  
-                     <label><input className="inputGenres" onChange={e => handleGenreCheck(e)} key={g.id} type='checkbox' name={g.name} value={g.name} />{g.name} {errors.genre && (
-                        <p className="error">{errors.genre}</p>
-                     )}</label>
-                  ))
+               { <select onChange={e => handleGenreSelect(e)}> {
+                  genres.map(g => (
+                     <option value={g.name}>{g.name}</option>
+                  ))}
+               </select> 
                }
+                 {input.genres.map(e => 
+               <div className="divgenres">
+                  <h2>Genres</h2>
+                  <p>{e}</p>
+                  <button className="buttonX" onClick={() => handleGenresDelete(e)}>X</button>
+               </div>
+            )}
+
                </div>
                <p className="pPlatforms">Platforms:</p>
                <div className="platforms"> 
-               {
-                  platform.map(g => (
-                     <label><input className="inputPlatform" onChange={e => handlePlatformCheck(e)} key={g.id} type='checkbox' name={g.name} value={g.name} />{g.name} {errors.platform && (
-                        <p className="error">{errors.platform}</p>
-                     )}</label>
-                  ))
+               { <select onChange={e => handlePlatformSelect(e)}> {
+                  platforms.map(g => (
+                     <option value={g.name}>{g.name}</option>
+
+                  ))}
+                  </select> 
                }
+                      {input.platforms.map(e => 
+               <div className="divPlatform">
+                  
+                  <p>{e}</p>
+                  <button className="buttonX" onClick={() => handlePlatformsDelete(e)}>X</button>
+               </div>
+            )}
                </div>
             </div>
 
-            <button type="submit">Submit</button>
+            <button type="submit">Submit</button> 
          </form>
+  
+       
       </div>
   )
 }

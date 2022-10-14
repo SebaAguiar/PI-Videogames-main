@@ -66,11 +66,12 @@ function Home() {
       
    }
 return (
-   <div className='back-ground'>
+
+   <div className='container'>
          <h1 className='tilte' >Videogames everywhere</h1>
-      <div className='contenedor_header'>
-         <Link to='/form'><button className='btn_crear'>Create Videogame</button></Link>
-         <button className='btn_recargar' onClick={e => {handleClick(e)}}>Recharge</button>
+      <div className='headerContainer'>
+         <Link to='/form'><button className='createButton'>Create Videogame</button></Link>
+         <button className='rechargeButton' onClick={e => {handleClick(e)}}>Recharge</button>
       </div>
  
 {/* /////////   FILTROS   /////////////// */}
@@ -103,6 +104,7 @@ return (
             </div>
             <SearchBar />
          </div>
+
 
 {/*
 /////////   CARDS   /////////////// */}

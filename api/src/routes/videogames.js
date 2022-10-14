@@ -36,7 +36,7 @@ router.get('/:id', async(req, res) => {
    const { id } = req.params
    try { 
       const allIds = await getId(id);
-      // console.log(allIds)
+      console.log('allIds ruta', allIds)
       allIds ? res.status(OK).send(allIds) : res.status(NOT_FOUND).send('Game not found...')
 
    } catch(err) {
@@ -89,6 +89,7 @@ router.post('/', async(req, res) => {
       //    })
       //    createdVideogame.addGenre(found)
       // })
+      console.log(genres)
       genres.forEach(async e => {
          const found = await Genre.findAll({
             where: {name: e}
@@ -96,12 +97,12 @@ router.post('/', async(req, res) => {
          // console.log(found)
          createdVideogame.addGenre(found)
       })
-      
+      console.log(platforms)
       platforms.forEach(async e => {
          // console.log(e)
          const found = await Platform.findAll({
             where: {name: e}
-         })
+         })  
          createdVideogame.addPlatform(found) 
          // console.log(found)
       })

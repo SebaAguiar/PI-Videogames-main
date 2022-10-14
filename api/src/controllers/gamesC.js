@@ -28,9 +28,7 @@ const getApiInfo = async() => {
             genres: e.genres.map(e => e.name),
             released: e.released,
             rating: e.rating,
-            platforms: e.platforms.map(e => e.platform.name).join(', '),
-            descriptionMin: e.platforms.map(e => e.requirements_en?.minimum),
-            descriptionRec: e.platforms.map(e => e.requirements_en?.recommended)
+            platforms: e.platforms.map(e => e.platform.name),
          }
       })  
       return apidata;
@@ -71,28 +69,49 @@ const getAllInfo = async() => {
 
 const getId = async(id) => {
    if(
+      
       id.match(
          /^[a-f0-9]{8}-?[a-f0-9]{4}-?4[a-f0-9]{3}-?[89ab][a-f0-9]{3}-?[a-f0-9]{12}$/i
       )
    ) {
       try {
-         let dbID = await Videogame.findAll({
-            where: {id},
-            include: [{
-               model: Genre,
-               attributes: ['name'],
-               through: {
-                   attributes: [],
-               }
-           }, { // ----
-               model: Platform,
-               attributes: ['name'],
-               through: {
-                   attributes: [],
-               }
-           }],
-            atributes: ['id', 'name', 'description', 'released', 'rating', 'image', 'createdInDb']
-         })
+         // let dbID = await Videogame.findAll({
+         //    where: {id},
+         //    include: [{
+         //       model: Genre,
+         //       attributes: ['name'],
+         //       through: {
+         //           attributes: [],
+         //       }
+         //   }, { // ----
+         //       model: Platform,
+         //       attributes: ['name'],
+         //       through: {
+         //           attributes: [],
+         //       }
+         //   }],
+         //    attributes: ['id', 'name', 'description', 'released', 'rating', 'image', 'createdInDb']
+         // })
+         let dbID = await Videogame.findByPk(
+            id,
+            {
+               include: [{
+                  model: Genre,
+                  attributes:['name'],
+                  through: {
+                     atributes: []
+                  }
+               }, {
+                  model: Platform,
+                  attributes: ['name'],
+                  through: {
+                     attributes:[]
+                  }
+               }],
+               attributes: ['id', 'name', 'description', 'released', 'rating', 'image', 'createdInDb']
+            }
+         )
+         console.log('log dbID', dbID)
          return dbID;
       } catch(err) {
          console.log(err);
@@ -109,6 +128,8 @@ const getId = async(id) => {
             platforms: idApi.parent_platforms.map((e) => e.platform.name),
             image: idApi.background_image,
             genres: idApi.genres.map((e) => e.name),
+            description: idApi.description
+            //
          }
          return game;
       } catch (err) {

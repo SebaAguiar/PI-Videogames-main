@@ -116,6 +116,7 @@ const reducer = (state = initialState, action) => {
       //////      GET GAME BY NAME
 
       case 'GET_BY_NAME':
+            
          return {
             ...state,
             videogames: action.payload
