@@ -70,8 +70,8 @@ function Description(prop) {
                <div className='imgContainer'>
                <h1 className='videogameName'>{videogame.name}</h1>
                <h3 className='ratingDetail general'>populariy: {videogame.rating}</h3>
-               <h4 className='genresDetail general'>{videogame.genres}</h4>
-               <h4 className='platformDetail general'>{videogame.platforms}</h4>
+               <h4 className='genresDetail general'>{videogame.genres.join(', ')}</h4>
+               <h4 className='platformDetail general'>{videogame.platforms.join(', ')}</h4>
                <img className='imageDetail' src={videogame.image} alt={videogame.name} />
                <p className='releasedDetail general'>Released at: {videogame.released}</p>
                </div>
