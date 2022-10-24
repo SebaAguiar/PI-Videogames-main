@@ -99,7 +99,7 @@ return (
                   genres.map(g => (
                      <option value={g.name}>{g.name}</option>
                      ))
-                     }
+               }
                </select>
             </div>
             <SearchBar />

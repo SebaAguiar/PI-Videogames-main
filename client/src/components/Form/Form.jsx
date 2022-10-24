@@ -11,17 +11,19 @@ const validate = (input) => {
    if(!input.name) {
       errors.name = 'Name must be completed'
    }
-   if(!input.platforms) {
+   if(!input.platforms.length) {
       errors.platforms = 'Platform must be completed'
    }
    if(!input.description) {
       errors.description = 'Description must be completed'
    }
-   if(!input.genres) {
+   if(!input.genres.length) {
       errors.genres = 'Description must be completed'
    }
    return errors
 }
+
+
 
 
 function Form() {
@@ -60,18 +62,25 @@ function Form() {
    const handleSubmit = (e) => {
       e.preventDefault()
       // console.log(input)
-      dispatch(postVideogame(input))
-      alert('Videogame successfully created')
-      setInput({
-         name: '',
-         description: '',
-         platforms: [], 
-         released: '',
-         genres:[],
-         rating: '',
-         image: ''
-      })
-      history.push('/videogames')
+      const errorsFields = validate(input)
+      setErrors(errorsFields)
+      if(!Object.keys(errorsFields).length) {
+         dispatch(postVideogame(input))
+         setInput({
+            name: '',
+            description: '',
+            platforms: [], 
+            released: '',
+            genres:[],
+            rating: '',
+            image: ''
+         })
+         alert('Videogame successfully created')
+         history.push('/videogames')
+      } else {
+         alert('Please complete all the camps needed')
+      }
+
    }
 
    const handleGenreSelect = (e) => {
@@ -149,10 +158,10 @@ function Form() {
                </select> 
                }
                  {input.genres.map(e => 
-               <div className="divgenres">
+               <div className="divgenres" value={input.genres}>
                   <h2>Genres</h2>
                   <p>{e}</p>
-                  <button className="buttonX" onClick={() => handleGenresDelete(e)}>X</button>
+                  <button  key={e} className="buttonX" onClick={() => handleGenresDelete(e)}>X</button>
                </div>
             )}
 
@@ -167,10 +176,10 @@ function Form() {
                   </select> 
                }
                       {input.platforms.map(e => 
-               <div className="divPlatform">
+               <div className="divPlatform" value={input.platforms}>
                   
                   <p>{e}</p>
-                  <button className="buttonX" onClick={() => handlePlatformsDelete(e)}>X</button>
+                  <button key={e} className="buttonX" onClick={() => handlePlatformsDelete(e)}>X</button>
                </div>
             )}
                </div>
