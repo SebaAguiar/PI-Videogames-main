@@ -8,12 +8,18 @@
     margin-left: 15px;
     background-color: rgba(96, 85, 85, 0.987);
     border-radius: 10px;
+    color: white;
     
 }
 
-.input_searchbar {
+
+.inputSearchbar::placeholder { 
+    color: white; 
+}
+
+.inputSearchbar {
    padding: 7px;
    background-color: rgba(96, 85, 85, 0.987);
     border-radius: 10px;
-    color: black;
+    color: white;
 }

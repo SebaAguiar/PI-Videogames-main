@@ -65,6 +65,7 @@ function Description(prop) {
                <p className='descriptionDetail general'>{videogame.description.replace(/<[^>]*>?/g, '')}</p>
                </div>
             </div>
+            
             }
             </div>
       </div>

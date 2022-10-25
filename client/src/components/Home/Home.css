@@ -1,12 +1,13 @@
-body {
 
-}
-.back-ground {
-  background-image: url(https://wallpapercave.com/wp/wp5215702.jpg);
-  background-size: 100%;
+.containerHome{
+  background-image: url(https://www.leagueoflegends.com/static/open-graph-2e582ae9fae8b0b396ca46ff21fd47a8.jpg);;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   }
   
 .cards {
+  width: 100%;
   display: grid;
   grid-template-columns: repeat(5, 200px);
   gap: 40px;
@@ -18,7 +19,7 @@ body {
 }
 
 .page {
-width: 150vh;
+
 display: flex;
 justify-content: center;
 padding-left:  20px;
@@ -32,19 +33,25 @@ padding-left:  20px;
 
 .tilte {
   text-align: center;
-  color: white;
-  background-color: rgba(23, 23, 23, 0.528);
-  padding: 40px;
+  color: hsl(40deg 46% 49%);
+  padding: 60px;
+  letter-spacing: 10px;
+  font-size: 44px;
+  margin: 0;
 }
 
-.btn_crear {
+.createButton, .rechargeButton {
   margin: 0 30px;
   padding: 10px;
   border-radius: 10px;
   background-color: rgb(96, 85, 85) ;
+  color: white;
+
 }
 
+
 .allSelects {
+  width: 150vh;
   display: flex;
   justify-content: space-between;
   margin: 0 60px
@@ -54,6 +61,6 @@ padding-left:  20px;
   margin: 35px 8px;
   border-radius: 8px;
   height: 30px;
-  color: brown;
-  background-color: black;
+  color: white;
+  background-color: rgba(96, 85, 85, 0.987);
 }

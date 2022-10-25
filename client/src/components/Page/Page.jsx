@@ -10,7 +10,7 @@ function Page({gamesPerPage, allVideogames, page}) {
       
    }
    return(
-      <nav className='container_page'>
+      <nav className='containerPage'>
          <ul className='page'>
             {
                pageNum?.map(n => (

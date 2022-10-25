@@ -8,12 +8,12 @@ import "./LandingPage.css";
 function LandingPage() {
     return (
       <div className="home">
-        <div className="container_videogames_title">
-          <h1 className="videogames_title">Videogames Everywhere</h1>
+        <div className="containerVideogamesTitle">
+          <h1 className="videogamesTitle">VIDEOGAMES EVERYWHERE</h1>
         </div>
-        <div className="container_videogames_button">
+        <div className="containerVideogamesButton">
           <Link to='/videogames'>
-            <button className="videogames_button">Start</button>
+            <button className="videogamesButton">START</button>
           </Link>
         </div>
       </div>

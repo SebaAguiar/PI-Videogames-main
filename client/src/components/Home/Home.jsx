@@ -65,10 +65,11 @@ function Home() {
       setOrder(`Order ${e.target.value}`)
       
    }
+
 return (
 
-   <div className='container'>
-         <h1 className='tilte' >Videogames everywhere</h1>
+   <div className='containerHome'>
+         <h1 className='tilte' >VIDEOGAMES EVERYWHERE</h1>
       <div className='headerContainer'>
          <Link to='/form'><button className='createButton'>Create Videogame</button></Link>
          <button className='rechargeButton' onClick={e => {handleClick(e)}}>Recharge</button>
@@ -115,6 +116,7 @@ return (
                // console.log(e.genres)
                // console.log(currentGames)
                return (
+
                      <Link to={`/videogames/${e.id}`}>
                         <Card
                            key={e.id}
@@ -123,21 +125,26 @@ return (
                            genres={e.genres} 
                            rating={e.rating}
                         />
-                     </Link>               
+                     </Link>   
+
                )
             })
          }
    
-{/* /////////   PAGINADO   /////////////// */}
+   </div>
 
-         <div className='page'>
+   {/* /////////   PAGINADO   /////////////// */}
+
+ 
+   <div className='page'>
+
             <Page 
             gamesPerPage={gamesPerPage} 
             allVideogames={allVideogames.length} 
             page={page}
             />
          </div>
-   </div>
+
 </div>
 
    )

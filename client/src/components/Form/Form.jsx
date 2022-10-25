@@ -8,6 +8,7 @@ import './Form.css'
 
 const validate = (input) => {
    let errors = {}
+   console.log(input)
    if(!input.name) {
       errors.name = 'Name must be completed'
    }
@@ -18,8 +19,14 @@ const validate = (input) => {
       errors.description = 'Description must be completed'
    }
    if(!input.genres.length) {
-      errors.genres = 'Description must be completed'
+      errors.genres = 'genres must be completed'
    }
+   if(!input.released.length) {
+      errors.released = '22/22/2222'
+   }
+   if(!input.rating.length) {
+      errors.rating = 1
+   } 
    return errors
 }
 
@@ -114,7 +121,7 @@ function Form() {
 
 
    return (
-      <div className="container">
+      <div className="containerForm">
          <div className="navContainer">
             <Link className="nav" to='/videogames'>
                <Nav />
@@ -150,24 +157,23 @@ function Form() {
                   <input className="inputImage" onChange={e => handleChange(e)} type="text" value={input.image} name="image" />
                </div>
                <p>Genres:</p>
-               <div className="genres">
                { <select onChange={e => handleGenreSelect(e)}> {
                   genres.map(g => (
                      <option value={g.name}>{g.name}</option>
                   ))}
                </select> 
                }
+               <div className="containerDivGenres">
                  {input.genres.map(e => 
-               <div className="divgenres" value={input.genres}>
-                  <h2>Genres</h2>
+               <div className="divGenres" value={e}>
+         
                   <p>{e}</p>
-                  <button  key={e} className="buttonX" onClick={() => handleGenresDelete(e)}>X</button>
+                  <button key={e} className="buttonX" onClick={() => handleGenresDelete(e)}>X</button>
                </div>
             )}
 
                </div>
                <p className="pPlatforms">Platforms:</p>
-               <div className="platforms"> 
                { <select onChange={e => handlePlatformSelect(e)}> {
                   platforms.map(g => (
                      <option value={g.name}>{g.name}</option>
@@ -175,6 +181,7 @@ function Form() {
                   ))}
                   </select> 
                }
+               <div className="containterDivPlatforms"> 
                       {input.platforms.map(e => 
                <div className="divPlatform" value={input.platforms}>
                   
@@ -184,8 +191,9 @@ function Form() {
             )}
                </div>
             </div>
-
-            <button type="submit">Submit</button> 
+         <div className="containerSubmit">
+            <button className="submit" type="submit">Submit</button> 
+         </div>
          </form>
   
        
