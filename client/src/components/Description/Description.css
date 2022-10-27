@@ -1,7 +1,7 @@
 .container{
-    background-image: url(https://wallpapercave.com/wp/wp5215702.jpg);
-    color:  white;
-    background-size: 100%;
+    background-image: url(https://www.leagueoflegends.com/static/open-graph-2e582ae9fae8b0b396ca46ff21fd47a8.jpg);;
+    background-size: cover;
+    background-repeat: no-repeat;
     background-attachment: fixed;
 }
 
@@ -57,10 +57,12 @@
 }
 
 .detailTitle {
+    text-align: center;
+    color: hsl(40deg 46% 49%);
+    padding: 60px;
+    letter-spacing: 10px;
+    font-size: 44px;
     margin: 0;
-    padding: 60px 0;
-    text-shadow: 4px 4px 8px #000000;
-    letter-spacing: 14px;
 }
 
 .containerDetailTitle {

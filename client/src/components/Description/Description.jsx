@@ -39,14 +39,10 @@ function Description(prop) {
             <Nav />
          </div>
          </Link>
-         {loading && <div className="loadingDetail">
-            <div>
-              <h1 className="messageDetail">Loading...</h1>
-            </div>
-          </div>}
+
           <div className='generalContainer'>
             <div className='containerDetailTitle'>
-            <h1 className='detailTitle'>Game Details</h1>
+            <h1 className='detailTitle'>GAME DETAILS</h1>
             </div>
             {
          
@@ -62,7 +58,7 @@ function Description(prop) {
                </div>
                <div className='detailContainer'>
                {/* <div dangerouslySetInnerHTML={{__html: videogame.description}}/> */}
-               <p className='descriptionDetail general'>{videogame.description.replace(/<[^>]*>?/g, '')}</p>
+               <p className='descriptionDetail general'>{videogame?.description?.replace(/<[^>]*>?/g, '')}</p>
                </div>
             </div>
             

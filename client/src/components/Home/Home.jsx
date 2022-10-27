@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getVideogames, filterByGenre, getGenres, filterByRating, sortByName, getById, filterApiDb } from '../../actions/actions';
+import { getVideogames, filterByGenre, getGenres, filterByRating, sortByName, getById, filterNew, filterApiDb } from '../../actions/actions';
 import { Link } from 'react-router-dom'
 import Card from '../Card/Card';
 import Page from '../Page/Page';
@@ -22,14 +22,16 @@ function Home() {
    
    useEffect(() => {
       dispatch(getVideogames())
-   }, [dispatch])
+   }, [])
    
    useEffect(() => {
       dispatch(getGenres())
    }, [dispatch])
    
    const page = (pageNum) => {
-      setCurrentPage(pageNum)
+      // console.log(pageNum)
+         setCurrentPage(pageNum)
+      
    }
 
    const handleClick = (e) => {
@@ -66,6 +68,12 @@ function Home() {
       
    }
 
+   const handleClickNew = (e) => {
+      e.preventDefault()
+      dispatch(filterNew(e))
+      setCurrentPage(1)
+   }
+
 return (
 
    <div className='containerHome'>
@@ -73,6 +81,7 @@ return (
       <div className='headerContainer'>
          <Link to='/form'><button className='createButton'>Create Videogame</button></Link>
          <button className='rechargeButton' onClick={e => {handleClick(e)}}>Recharge</button>
+         <button className='filterNew' onClick={e => handleClickNew(e)}>Filter</button>
       </div>
  
 {/* /////////   FILTROS   /////////////// */}
@@ -98,18 +107,18 @@ return (
                   <option value="All">All</option>
                {
                   genres.map(g => (
-                     <option value={g.name}>{g.name}</option>
+                     <option key={g.id} value={g.name}>{g.name}</option>
                      ))
                }
                </select>
             </div>
-            <SearchBar />
+            <SearchBar setCurrentPage={setCurrentPage}/>
          </div>
 
 
 {/*
 /////////   CARDS   /////////////// */}
-
+  
    <div className='cards'>
          {
             currentGames?.map(e => {
@@ -117,9 +126,9 @@ return (
                // console.log(currentGames)
                return (
 
-                     <Link to={`/videogames/${e.id}`}>
+                     <Link key={e.id} to={`/videogames/${e.id}`}>
                         <Card
-                           key={e.id}
+                           
                            name={e.name} 
                            image={e.image} 
                            genres={e.genres} 
@@ -133,11 +142,12 @@ return (
    
    </div>
 
+
    {/* /////////   PAGINADO   /////////////// */}
 
  
    <div className='page'>
-
+   
             <Page 
             gamesPerPage={gamesPerPage} 
             allVideogames={allVideogames.length} 

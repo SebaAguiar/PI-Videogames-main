@@ -1,9 +1,10 @@
 import React from 'react'
 import './page.css'
-
+import { useState } from 'react'
 
 function Page({gamesPerPage, allVideogames, page}) {
    const pageNum = []
+   const [currentPage, setCurrentPage] = useState(1)
 
    for (let i = 1; i <= Math.ceil(allVideogames/gamesPerPage); i++) {
       pageNum.push(i);

@@ -157,6 +157,15 @@ const reducer = (state = initialState, action) => {
             }
 
          
+         case 'FILTER_NEW': 
+            let toFilter = state.videogamesCopy
+            let filtered = toFilter.filter(e => e.reviews_text_count > 40)
+            return {
+               ...state,
+               videogames: filtered 
+            }
+
+         
       default:
          return state
    }

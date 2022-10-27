@@ -63,6 +63,13 @@ export const getByName = (name) => {
    }
 }
 
+export const filterNew = (payload) => {
+   return {
+      type: 'FILTER_NEW',
+      payload
+   }
+}
+
 export const getById = (id) => {
    // console.log(id)
    return async(dispatch) => {

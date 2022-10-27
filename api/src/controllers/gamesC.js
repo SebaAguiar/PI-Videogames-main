@@ -29,6 +29,7 @@ const getApiInfo = async() => {
             released: e.released,
             rating: e.rating,
             platforms: e.platforms.map(e => e.platform.name),
+            reviews_text_count: e.reviews_text_count
          }
       })  
       return apidata;
@@ -56,7 +57,7 @@ const getDbInfo = async() => {
    return db
 }
 
-
+// hacer en getAllInfo una funcion que mire si hay juegos eliminados
 const getAllInfo = async() => {
    const apiInfo = await getApiInfo();
    // console.log(typeof apiInfo)
