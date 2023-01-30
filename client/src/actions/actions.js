@@ -3,7 +3,7 @@ import axios from 'axios'
 
 export const getVideogames = () => {
     return async(dispatch) => {
-        let json = await axios.get('http://localhost:3001/videogames')
+        let json = await axios.get('https://videogames-everywhere-backend.onrender.com/videogames')
          // console.log(typeof json.data)
          // console.log(json.data)
 
@@ -19,7 +19,7 @@ export const getGenres = () => {
  
     return async(dispatch) => {
 
-        let json = await axios.get('http://localhost:3001/genres')
+        let json = await axios.get('https://videogames-everywhere-backend.onrender.com/genres')
       //   console.log(json.data)
         return dispatch({
             type: 'GET_GENRES',
@@ -52,7 +52,7 @@ export const sortByName = (payload) => {
 export const getByName = (name) => {
    return async(dispatch) => {
       try {
-         const json = await axios.get(`http://localhost:3001/videogames?name=${name}`)
+         const json = await axios.get(`https://videogames-everywhere-backend.onrender.com/videogames?name=${name}`)
          return dispatch({
             type: 'GET_BY_NAME',
             payload: json.data
@@ -74,7 +74,7 @@ export const getById = (id) => {
    // console.log(id)
    return async(dispatch) => {
       try {
-         const json = await axios.get(`http://localhost:3001/videogames/${id}`)
+         const json = await axios.get(`https://videogames-everywhere-backend.onrender.com/videogames/${id}`)
          console.log(json.data)
          return dispatch({
             type: 'GET_BY_ID',
@@ -97,7 +97,7 @@ export const postVideogame = (payload) => {
    return async (dispatch) => {
       try {
          // console.log(payload)
-         const json = await axios.post('http://localhost:3001/videogames', payload)
+         const json = await axios.post('https://videogames-everywhere-backend.onrender.com/videogames', payload)
          // console.log(json.data)
          return dispatch({
             type: 'POST_VIDEOGAME',
@@ -113,7 +113,7 @@ export const postVideogame = (payload) => {
 export const getPlatforms = () => {
 
    return async(dispatch) => {
-       let json = await axios.get('http://localhost:3001/platforms')
+       let json = await axios.get('https://videogames-everywhere-backend.onrender.com/platforms')
        return dispatch({
            type: 'GET_PLATFORMS',
            payload: json.data
