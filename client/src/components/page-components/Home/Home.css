@@ -1,11 +1,10 @@
-
-.containerHome{
-  background-image: url(https://www.leagueoflegends.com/static/open-graph-2e582ae9fae8b0b396ca46ff21fd47a8.jpg);;
+.containerHome {
+  background-image: url(https://www.leagueoflegends.com/static/open-graph-2e582ae9fae8b0b396ca46ff21fd47a8.jpg);
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  }
-  
+}
+
 .cards {
   width: 100%;
   display: grid;
@@ -19,11 +18,9 @@
 }
 
 .page {
-
-display: flex;
-justify-content: center;
-padding-left:  20px;
-
+  display: flex;
+  justify-content: center;
+  padding-left: 20px;
 }
 .contenedor_header {
   display: flex;
@@ -40,21 +37,21 @@ padding-left:  20px;
   margin: 0;
 }
 
-.createButton, .rechargeButton, .filterNew {
+.createButton,
+.rechargeButton,
+.filterNew {
   margin: 0 30px;
   padding: 10px;
   border-radius: 10px;
-  background-color: rgb(96, 85, 85) ;
+  background-color: rgb(96, 85, 85);
   color: white;
-
 }
-
 
 .allSelects {
   width: 150vh;
   display: flex;
   justify-content: space-between;
-  margin: 0 60px
+  margin: 0 60px;
 }
 
 .select {
@@ -64,4 +61,3 @@ padding-left:  20px;
   color: white;
   background-color: rgba(96, 85, 85, 0.987);
 }
-

@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Baumans&family=Poppins&display=swap');
 
-
 .home {
   position: relative;
   background-image: url(../../imagenes/collage.png.jpg);
@@ -35,7 +34,5 @@
 
 .containerVideogamesButton {
   text-align: center;
-    padding: 35px;
+  padding: 35px;
 }
-
-
